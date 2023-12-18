@@ -1,0 +1,4 @@
+name: SnowBalls
+version: '${project.version}'
+main: caps123987.snowballs.SnowBalls
+api-version: '1.20'
