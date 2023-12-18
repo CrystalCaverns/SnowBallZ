@@ -2,6 +2,7 @@ package caps123987.listeners;
 
 import caps123987.snowballs.SnowBalls;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -28,6 +29,12 @@ public class SnowListener implements Listener {
             return;
         }
 
+        if(plKill.isBlocking()){
+            plKill.setCooldown(Material.SHIELD, 40);
+            plKill.clearActiveItem();
+            return;
+        }
+
         if(!e.getCause().equals(DamageCause.PROJECTILE)){
             return;
         }
@@ -35,14 +42,14 @@ public class SnowListener implements Listener {
         Snowball snow = (Snowball) e.getDamager();
 
         if(!(snow.getShooter() instanceof Player damager)){
-            plKill.damage(2);
+            plKill.damage(4);
             plKill.setVelocity(snow.getVelocity().multiply(2));
             return;
         }
 
         damager.sendMessage("You hit " + plKill.getName() + " with a snowball!");
         plKill.sendMessage("You were hit by " + damager.getName() + " with a snowball!");
-        plKill.damage(2);
+        plKill.damage(4);
         plKill.setVelocity(snow.getVelocity().multiply(2));
 
     }
