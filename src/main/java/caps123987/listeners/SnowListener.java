@@ -30,8 +30,14 @@ public class SnowListener implements Listener {
         }
 
         if(plKill.isBlocking()){
-            plKill.setCooldown(Material.SHIELD, 40);
-            plKill.clearActiveItem();
+            if(plKill.getCooldown(Material.SHIELD)==0) {
+                plKill.setCooldown(Material.SHIELD, 40);
+            }
+
+            Bukkit.getScheduler().scheduleSyncDelayedTask(SnowBalls.getInstance(),()->{
+                plKill.clearActiveItem();
+            }, 20L);
+
             return;
         }
 
