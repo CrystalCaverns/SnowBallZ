@@ -80,13 +80,11 @@ public class SnowListener implements Listener {
     @EventHandler
     public void throwProj(ProjectileLaunchEvent e){
         if(e.getEntity() instanceof Snowball snow){
-            snow.getVelocity().multiply(2);
+            snow.setVelocity(snow.getVelocity().multiply(1.25));
         }
         if(e.getEntity() instanceof ThrownPotion pot){
-            Bukkit.getScheduler().scheduleSyncDelayedTask(SnowBalls.getInstance(),()-> {
-                pot.getVelocity().multiply(4);
-            }, 1L);
+            pot.setVelocity(pot.getVelocity().multiply(1.5));
         }
-        Bukkit.broadcastMessage(e.getEntity().getClass().getName());
+
     }
 }
