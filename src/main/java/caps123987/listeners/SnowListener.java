@@ -3,7 +3,9 @@ package caps123987.listeners;
 import caps123987.snowballs.SnowBalls;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Snowball;
+import org.bukkit.entity.ThrownPotion;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -13,7 +15,6 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class SnowListener implements Listener {
@@ -21,7 +22,7 @@ public class SnowListener implements Listener {
 
     @EventHandler
     public void onSnowballHit(EntityDamageByEntityEvent e) {
-        if(!(e.getDamager() instanceof Snowball)){
+        if(!(e.getDamager() instanceof Snowball snow)){
             return;
         }
 
@@ -34,9 +35,7 @@ public class SnowListener implements Listener {
                 plKill.setCooldown(Material.SHIELD, 40);
             }
 
-            Bukkit.getScheduler().scheduleSyncDelayedTask(SnowBalls.getInstance(),()->{
-                plKill.clearActiveItem();
-            }, 20L);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(SnowBalls.getInstance(), plKill::clearActiveItem, 20L);
 
             return;
         }
@@ -44,8 +43,6 @@ public class SnowListener implements Listener {
         if(!e.getCause().equals(DamageCause.PROJECTILE)){
             return;
         }
-
-        Snowball snow = (Snowball) e.getDamager();
 
         if(!(snow.getShooter() instanceof Player damager)){
             plKill.damage(4);
