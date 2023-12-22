@@ -2,3 +2,15 @@ name: SnowBalls
 version: '${project.version}'
 main: caps123987.snowballs.SnowBalls
 api-version: '1.20'
+
+permissions:
+  snowevent.admin:
+    description: Allows you to use snow event admin commands
+
+commands:
+  eventstart:
+    description: starts the event
+    usage: /<command>
+  eventstop:
+    description: stops the event
+    usage: /<command>
